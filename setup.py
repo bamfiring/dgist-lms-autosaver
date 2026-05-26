@@ -222,6 +222,41 @@ def initialize_data_files():
             with open(fpath, 'w', encoding='utf-8') as f:
                 f.write('[]' if fname == 'downloaded_files.json' else '{}')
 
+def setup_scheduler(schedule_time):
+    """Windows 작업 스케줄러 등록"""
+    print_step(7, "자동 실행 스케줄러 등록")
+    print(f"""
+  매일 {schedule_time}에 자동으로 LMS를 확인합니다.
+  (컴퓨터가 켜져 있을 때만 실행됩니다)
+""")
+    answer = input("  지금 바로 스케줄러를 등록할까요? (y/n): ").strip().lower()
+    if answer != 'y':
+        print("  스케줄러 등록을 건너뜁니다.")
+        print("  나중에 등록하려면 관리자 PowerShell에서:")
+        print(f"  .\\schedule_setup.ps1 -Time {schedule_time}AM")
+        return
+
+    import subprocess
+    time_fmt = schedule_time.replace(':', '') 
+    hour = int(schedule_time.split(':')[0])
+    ampm = 'AM' if hour < 12 else 'PM'
+    if hour > 12:
+        hour -= 12
+    time_str = f"{hour:02d}:{schedule_time.split(':')[1]}{ampm}"
+
+    script_path = r"C:\lms-autosaver\schedule_setup.ps1"
+    result = subprocess.run(
+        ['powershell', '-ExecutionPolicy', 'Bypass', '-File', script_path, '-Time', time_str],
+        capture_output=True, text=True
+    )
+    if '완료' in result.stdout:
+        print(f"  ✅ 스케줄러 등록 완료! 매일 {schedule_time}에 자동 실행됩니다.")
+    else:
+        print("  ⚠️  관리자 권한이 필요합니다.")
+        print("  PowerShell을 관리자 권한으로 열고 아래 명령어를 실행하세요:")
+        print(f"  cd C:\\lms-autosaver")
+        print(f"  .\\schedule_setup.ps1 -Time {time_str}")
+
 def print_completion():
     """설치 완료 메시지"""
     print(f"""
@@ -281,6 +316,9 @@ def main():
     # 데이터 파일 초기화
     initialize_data_files()
 
+    # 스케줄러 등록
+    setup_scheduler(schedule_time)
+    
     # 완료
     print_completion()
 

@@ -82,3 +82,14 @@ dgist-lms-autosaver/
 - `config.py`, `credentials.json` 은 절대 공유하지 마세요.
 - 개인정보가 포함되어 있습니다.
 - `.gitignore` 에 의해 자동으로 GitHub 업로드에서 제외됩니다.
+
+## 자동 실행 설정 (Windows)
+
+setup.py 실행 시 자동으로 설정되지만, 수동으로 등록하려면:
+
+1. PowerShell을 **관리자 권한**으로 실행
+2. 아래 명령어 입력:
+cd dgist-lms-autosaver
+.\schedule_setup.ps1 -Time 08:00AM
+- 컴퓨터가 켜져 있을 때 매일 지정한 시간에 자동 실행
+- 시간 변경: `-Time 09:00AM` 처럼 원하는 시간으로 변경

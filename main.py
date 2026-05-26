@@ -73,9 +73,16 @@ if __name__ == "__main__":
     print(f"매일 {SCHEDULE_TIME}에 자동 실행됩니다.")
     print("지금 바로 실행하려면 Enter, 스케줄만 등록하려면 Ctrl+C")
 
+    import sys
+    auto_mode = '--auto' in sys.argv
+
     try:
-        input()
-        job()
+        if auto_mode:
+            print("자동 실행 모드로 시작합니다...")
+            job()
+        else:
+            input()
+            job()
     except KeyboardInterrupt:
         pass
 

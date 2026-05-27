@@ -57,13 +57,7 @@ python setup.py
 **① LMS 아이디/비밀번호 입력**
 - lms.dgist.ac.kr 에서 직접 로그인하는 아이디/비번 입력
 
-**② Gemini API 키 발급 (무료)**
-1. https://aistudio.google.com/apikey 접속
-2. Google 계정 로그인
-3. "Create API Key" 클릭
-4. 생성된 키 복사 (`AIza...` 로 시작)
-
-**③ Google Drive 설정**
+**② Google Drive 설정**
 1. https://console.cloud.google.com 접속
 2. 새 프로젝트 생성 → 이름: `LMS-AutoSaver`
 3. "API 및 서비스" → "라이브러리" → `Google Drive API` 검색 → "사용"
@@ -75,12 +69,12 @@ python setup.py
 7. `dgist-lms-autosaver` 폴더에 복사
 8. "OAuth 동의 화면" → "테스트 사용자" → 본인 Gmail 추가
 
-**④ Gmail 앱 비밀번호 발급**
+**③ Gmail 앱 비밀번호 발급**
 1. https://myaccount.google.com/apppasswords 접속
 2. 앱 이름: `LMS알리미` 입력 후 "만들기"
 3. 16자리 비밀번호 복사 (공백 제거)
 
-**⑤ 자동 실행 시간 설정**
+**④ 자동 실행 시간 설정**
 - 원하는 시간 입력 (예: `08:00`)
 
 ---

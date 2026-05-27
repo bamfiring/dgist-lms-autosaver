@@ -298,16 +298,13 @@ def main():
             break
         print("\n  다시 입력해주세요.")
 
-    # 2. Gemini API
-    gemini_key = get_gemini_key()
-
-    # 3. Google Drive
+    # 2. Google Drive
     get_google_drive_credentials()
 
-    # 4. 이메일
+    # 3. 이메일
     email, app_pw = get_email_info()
 
-    # 5. 스케줄
+    # 4. 스케줄
     schedule_time = get_schedule_time()
 
     # config.py 생성
